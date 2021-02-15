@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login Result</title>
+</head>
+<body>
+        <script>
+            if("{{isSuccess}}" == "True")
+            {
+                alert("로그인에 성공하였습니다.");
+            }
+            else if("{{isIdExist}}" == "False")
+            {
+                alert("존재하지 않는 ID입니다.");
+            }
+            else if("{{isPWCorrect}}" == "False")
+            {
+                alert("비밀번호가 올바르지 않습니다.");
+            }
+        </script>
+</body>
+</html>

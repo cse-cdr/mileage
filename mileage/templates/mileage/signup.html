@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>signup</title>
+</head>
+<body>
+        <form method="post" id="signup" action="signup_result">
+            {% csrf_token %}
+            <label for="user_id">ID:    </label>
+            <input type="text" id="user_id" name="user_id"><br>
+            <label for="password">PW: </label>
+            <input type="password" id="password" name = 'pw'><br>
+            <label for="password">PW(repeat): </label>
+            <input type="password" id="password_repeat" name = pw_repeat><br>
+            <input type="submit" id="submit" value="회원가입">
+            <a href = "login">로그인하시려면 여기를 누르세요</a>
+        </form>
+</body>
+</html>

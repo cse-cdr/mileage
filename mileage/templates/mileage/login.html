@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+</head>
+<body>
+
+    {% if mode == 'register_mileage' %}
+        <script>
+            alert("path: {{path}}")
+        </script>
+        <form method ="post" action="register_mileage?store_name={{store_name}}&point={{point}}">
+
+    {% else %}
+        <form method="post" action="login_result">
+    {% endif %}
+            {% csrf_token %}
+            <input type="hidden" value="{{store_name}}">
+            <input type="hidden" value="{{point}}">
+            <label for="user_id">ID:    </label>
+            <input type="text" id="user_id" name="user_id"><br>
+            <label for="password">PW: </label>
+            <input type="password" id="password" name = 'password'><br>
+            <input type="submit" id="submit" value="로그인">
+            <a href="/mileage">아이디가 없으신가요?</a>
+        </form>
+
+
+</body>
+</html>

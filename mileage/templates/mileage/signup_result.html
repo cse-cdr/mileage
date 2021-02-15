@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Sign up Result</title>
+</head>
+<body>
+        <script>
+            alert("isPwSame: " + "{{isPwSame}}")
+            alert("isSuccess: " + "{{isSuccess}}")
+            alert("isUserIdAlreadyExists: " + "{{isUserIdAlreadyExists}}")
+
+            if("{{isUserIdAlreadyExists}}" == "True")
+            {
+                alert("이미 동일한 ID가 존재합니다.")
+            }
+            else if("{{isPwSame}}" == "False")
+            {
+                alert("입력한 비밀번호가 동일하지 않습니다.\n다시 한번 확인해주세요.")
+            }
+
+            if("{{isSuccess}}" == "False")
+            {
+                alert("회원가입에 실패하였습니다.")
+                window.location.href='./';
+            }
+            else
+            {
+                alert("회원가입에 성공하였습니다.")
+                window.location.href='./login';
+            }
+        </script>
+
+</body>
+</html>
