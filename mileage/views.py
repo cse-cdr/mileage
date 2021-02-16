@@ -114,6 +114,17 @@ class LoginValidateView(View):
         }
         return render(request, self.template_path, context)
 
+class LogoutView(View):
+    def get(self, request):
+        template_name = 'login.html'
+        template_path = MileageConfig.name + '/' + template_name
+        context = {'mode': 'login', 'loginstate': False}
+
+        if 'login_id' in request.session:
+            del request.session['login_id']
+
+        return render(request, template_path, context)
+
 class RegisterMileageView(View):
     def post(self, request):
         template_name = 'register_mileage.html'
@@ -133,6 +144,7 @@ class RegisterMileageView(View):
 
             if user.password == password:
                 isPWCorrect = True
+                request.session['login_id'] = user.user_id
                 if not Store.objects.filter(name=store_name).exists():
                     store=Store(name=store_name)
                     store.save()

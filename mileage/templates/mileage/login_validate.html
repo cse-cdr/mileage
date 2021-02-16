@@ -9,14 +9,17 @@
             if("{{isSuccess}}" == "True")
             {
                 alert("로그인에 성공하였습니다.");
+                location.href="./"
             }
             else if("{{isIdExist}}" == "False")
             {
                 alert("존재하지 않는 ID입니다.");
+                location.href="./login"
             }
             else if("{{isPWCorrect}}" == "False")
             {
                 alert("비밀번호가 올바르지 않습니다.");
+                location.href="./login"
             }
         </script>
 </body>

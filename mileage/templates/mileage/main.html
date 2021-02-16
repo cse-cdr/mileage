@@ -3,9 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <title>Main</title>
+    <script>
+        function logout(){
+            location.href='logout'
+        }
+    </script>
 </head>
 <body>
-    <p>Welcome {{user_id}}.</p>
+    <p>Welcome {{user_id}}. <button onclick="logout()">Logout</button></p>
     <table class="table">
         <thead>
             <th>No.</th>
