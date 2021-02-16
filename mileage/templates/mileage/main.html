@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Main</title>
+</head>
+<body>
+    <p>Welcome {{user_id}}.</p>
+    <table class="table">
+        <thead>
+            <th>No.</th>
+            <th>User</th>
+            <th>Store</th>
+            <th>Points</th>
+            <th>Registered Date</th>
+
+        </thead>
+        <tbody>
+            {% for mileage in object_list %}
+                <tr>
+                    <td>{{mileage.id}}</td>
+                    <td>{{mileage.user}}</td>
+                    <td>{{mileage.store}}</td>
+                    <td>{{mileage.point}}</td>
+                    <td>{{mileage.registered_date}}</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</body>
+</html>

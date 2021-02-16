@@ -2,11 +2,33 @@ from django.shortcuts import render
 from django.views import View
 from .apps import *
 from .models import *
-
+from django.views.generic.list import ListView
+from django.http import HttpResponse
 # Create your views here.
+
+class MainView(View):
+    def get(self, request):
+        if 'login_id' in request.session:
+            user = User.objects.get(user_id=request.session['login_id'])
+            mileage_history= Mileage.objects.filter(user=user.id)
+            template_name = 'main.html'
+            template_path = MileageConfig.name + '/' + template_name
+            context={
+                'user_id': request.session['login_id'],
+                'object_list':mileage_history,
+            }
+
+            return render(request,template_path,context)
+
+        else:
+            template_name = 'login.html'
+            template_path = MileageConfig.name + '/' + template_name
+            context = {'mode': 'login', 'loginstate': False}
+
+            return render(request,template_path,context)
+
+
 class SignupView(View):
-
-
     def get(self,request):
         template_name = 'signup.html'
         template_path = MileageConfig.name + '/' + template_name
@@ -50,9 +72,7 @@ class LoginView(View):
     template_path = MileageConfig.name + '/' + template_name
 
     def get(self, request):
-        path = request.get_full_path().__str__()
-
-        context = {'mode':'login', 'path': path}
+        context = {'mode':'login', 'loginstate':False}
         if 'store_name' in request.GET and 'point' in request.GET:
             StoreName = request.GET['store_name']
             point = request.GET['point']
@@ -61,11 +81,14 @@ class LoginView(View):
                 'store_name': StoreName,
                 'point': point,
             }
+        if 'login_id' in request.session:
+            context['user_id_login_'] = request.session['login_id']
+            context['loginstate'] = True
 
         return render(request, self.template_path, context)
 
-class LoginResultView(View):
-    template_name = 'login_result.html'
+class LoginValidateView(View):
+    template_name = 'login_validate.html'
     template_path = MileageConfig.name + '/' + template_name
 
     def post(self, request):
@@ -82,6 +105,7 @@ class LoginResultView(View):
             if user.password == password:
                 isPWCorrect = True
                 isSuccess =True
+                request.session['login_id'] = user.user_id
 
         context = {
             'isIdExist': isIdExist,
@@ -129,3 +153,8 @@ class RegisterMileageView(View):
             'point': point,
         }
         return render(request, template_path, context)
+
+class MileageHistoryView(ListView):
+    model = Mileage
+    template_name = "mileage/mileage_history.html"
+

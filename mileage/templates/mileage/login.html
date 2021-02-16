@@ -5,15 +5,18 @@
     <title>Login</title>
 </head>
 <body>
-
+    <script>
+        if("{{loginstate}}" == "True")
+        {
+            alert("login_id: {{user_id_login_}}")
+        }
+    </script>
     {% if mode == 'register_mileage' %}
-        <script>
-            alert("path: {{path}}")
-        </script>
+
         <form method ="post" action="register_mileage?store_name={{store_name}}&point={{point}}">
 
     {% else %}
-        <form method="post" action="login_result">
+        <form method="post" action="login_validate">
     {% endif %}
             {% csrf_token %}
             <input type="hidden" value="{{store_name}}">
